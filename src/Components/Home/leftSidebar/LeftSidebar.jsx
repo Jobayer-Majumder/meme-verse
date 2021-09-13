@@ -12,6 +12,7 @@ const LeftSidebar = () => {
                 
                 
                 <div className="p-2">
+                    <h3 className="text-gray-500 font-medium">MemeVerse</h3>
                     {
                         mVerseData.map((d, index) => 
                         <div key={index++} className='flex gap-4 justify-start items-center py-2 px-5 my-2 rounded bg-white hover:bg-gray-200 cursor-pointer'> 

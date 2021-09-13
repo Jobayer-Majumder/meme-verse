@@ -6,7 +6,7 @@ import SingleMeme from './SingleMeme/SingleMeme';
 
 const MemesFeed = () => {
     return (
-        <section>
+        <section className='h-screen overflow-y-scroll'>
             {
                 feedData.map((d, index) => <SingleMeme key={index++} data={d} />)
             }
