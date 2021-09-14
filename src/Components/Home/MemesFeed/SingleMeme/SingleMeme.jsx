@@ -17,9 +17,15 @@ const SingleMeme = ({ data }) => {
         if(isOnComment){
             return (
                 <>
-                    <div className='flex justify-evenly items-center pt-3'>
-                        <textarea className='w-100 border rounded' name="w3review" rows="2"  cols='70' />
-                        <AiOutlineSend className='inline text-2xl'/>
+                    <div className='relative pt-3 text-right'>
+                        <textarea className='w-full py-2 px-3 border border-gray-300 rounded focus:border-indigo-500 transition duration-500 focus:outline-none' name="comment" rows="2"  cols='70' placeholder='Leave your opinion...'/> 
+                        <button onClick={() => setIsOnComment(false)} className='py-2 px-3 bg-red-500 hover:bg-red-900 rounded text-white font-medium mr-2'>
+                            Cancel
+                        </button>
+                        <button className='py-2 px-3 bg-indigo-500 hover:bg-indigo-900 rounded text-white font-medium'>
+                            Post
+                            <AiOutlineSend className='text-lg inline ml-1'/>
+                        </button>
                     </div>
                 </>
             )
@@ -45,13 +51,13 @@ const SingleMeme = ({ data }) => {
                 </div>
                 <div className="flex justify-between">
                     <div className="flex gap-2">
-                        <button className='py-2 px-3 border rounded-md bg-gray-300'>
+                        <button className='py-2 px-3 border rounded-md bg-gray-200'>
                             <AiOutlineLike className='inline mr-1 text-xl'/>
                                 {
                                     likes
                                 }
                         </button>
-                        <button onClick={() => setIsOnComment(!isOnComment)} className='py-2 px-3 border rounded-md bg-gray-300'>
+                        <button onClick={() => setIsOnComment(!isOnComment)} className='py-2 px-3 border rounded-md bg-gray-200'>
                             <AiOutlineComment className='inline mr-1 text-xl'/>
                             {
                                 comments
