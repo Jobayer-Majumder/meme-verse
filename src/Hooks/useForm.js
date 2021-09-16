@@ -4,16 +4,16 @@ import { emailRegex, passRegex } from "../pages/Authentication/Regex/Regex";
 
 const useForm = () => {
     const [inputErr, setInputErr] = React.useState({});
-    const [validateValue, setValidateValue] = React.useState({});
+    const [validValue, setValidValue] = React.useState({});
 
-    const SignUpInputValidation = e => {
+    const handleInputValidation = e => {
         const { name, value } = e.target;
-        const prevValue = { ...validateValue };
+        const prevValue = { ...validValue };
         if (name === 'name') {
             if (value.trim().length >= 4) {
                 
                 prevValue[name] = value;
-                setValidateValue(prevValue);
+                setValidValue(prevValue);
                 setInputErr(null);
             }else{
                 prevValue[name] = null;
@@ -24,10 +24,10 @@ const useForm = () => {
             if (!emailRegex.test(value)) {
                 setInputErr({ ...inputErr, name: name, errMassage: 'Please enter valid email !' })
                 prevValue[name] = null;
-                setValidateValue(prevValue);
+                setValidValue(prevValue);
             } else {
                 prevValue[name] = value;
-                setValidateValue(prevValue);
+                setValidValue(prevValue);
                 setInputErr(null);
             }
         }
@@ -35,15 +35,15 @@ const useForm = () => {
             if (!passRegex.test(value)) {
                 setInputErr({ ...inputErr, name: name, errMassage: 'Must be more than 8 chars combine with uppercase and lowercase, and at least one number' })
                 prevValue[name] = null
-                setValidateValue(prevValue);
+                setValidValue(prevValue);
             } else {
                 prevValue[name] = value;
-                setValidateValue(prevValue);
+                setValidValue(prevValue);
                 setInputErr(null);
             };
         };
     };
-    return { SignUpInputValidation, inputErr, validateValue };
+    return { handleInputValidation, inputErr, validValue };
 };
 
 export default useForm;

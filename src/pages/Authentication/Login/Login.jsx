@@ -2,22 +2,41 @@ import React from 'react';
 import Navbar from '../../../Components/Shared/Navbar/Navbar';
 import signInImg from '../../../assets/images/undraw_unlock_24mb.svg';
 import { Link } from 'react-router-dom';
+import useForm from '../../../Hooks/useForm';
 
 
 const Login = () => {
+    const { handleInputValidation, validValue } = useForm()
+
+
+    const handleLogin = e => {
+        e.preventDefault()
+
+        fetch('http://localhost:5000/login', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify(validValue)
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+
+    };
+
+    console.log(validValue)
+
     return (
         <section>
             <Navbar />
             <div className="container mx-auto px-2 md:px-0 py-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     <div className="border p-3 flex items-center text-center">
-                        <form action="/" className='w-full'>
+                        <form onSubmit={handleLogin} className='w-full'>
                             <h2 className="py-2 text-xl font-medium text-indigo-500">Enter your credential</h2>
                             <div className="p-3">
-                                <input className='w-full md:w-2/3 py-2 px-3 border border-gray-300 rounded focus:border-indigo-500 transition duration-500 focus:outline-none' type="email" name="" id="" placeholder='Your Email' />
+                                <input onChange={e => handleInputValidation(e)} className='w-full md:w-2/3 py-2 px-3 border border-gray-300 rounded focus:border-indigo-500 transition duration-500 focus:outline-none' type="email" name="email" id="" placeholder='Your Email' />
                             </div>
                             <div className="p-3">
-                                <input className='w-full md:w-2/3 py-2 px-3 border border-gray-300 rounded focus:border-indigo-500 transition duration-500 focus:outline-none' type="password" name="" id="" placeholder='Your secret code' />
+                                <input onChange={e => handleInputValidation(e)} className='w-full md:w-2/3 py-2 px-3 border border-gray-300 rounded focus:border-indigo-500 transition duration-500 focus:outline-none' type="password" name="pass" id="" placeholder='Your secret code' />
                             </div>
                             <div className="p-3">
                                 <input className='w-full md:w-2/3 py-2 px-3 transition duration-500 bg-gray-300 hover:bg-indigo-500 cursor-pointer rounded-md hover:text-white font-medium' type="submit" value="Login" />
